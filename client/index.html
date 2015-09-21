@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html ng-app="RepsApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Find your representative</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <!-- TODO You need to put your style imports here -->
-  </head>
-  <body>
-    <div ng-controller="MainCtrl as main">
-      <form ng-submit="main.searchByZip(main.inputs.zip)">
-        <label>
-          Zip Code: <input type="string" ng-model="main.inputs.zip" />
-        </label>
-        <p>{{main.inputs.zip}}</p>
-        <button type="submit">Submit</button>
-      </form>
-      <ul>
-        <li ng-repeat="rep in main.reps">
-          {{rep.name}} ({{rep.state}})
-        </li>
-      </ul>
+
+<head>
+  <meta charset="utf-8">
+  <title>Find your Congressmen</title>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      padding-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand">Search for your Congressmen</a>
+      </div>
     </div>
-    <!-- TODO You need to put your script tags here -->
-    <script src="/bower_components/angular/angular.min.js" ></script>
-    <script src="/js/app.js"></script>
-  </body>
+  </nav>
+
+  <div ng-controller="MainCtrl as main" class="container">
+    <h4>Select type of Congressman</h4>
+    <label><h5><input type="radio" ng-model="main.chooseType" value="reps" /> Representatives</h5></label><br>
+    <label><h5><input type="radio" ng-model="main.chooseType" value="sens" /> Senators</h5></label>
+    <br>
+    <br>
+    <h4>Search By:</h4>
+    <form class="form-inline">
+      <select class="form-control" ng-options="item as item.label for item in main.apis" ng-model="main.selectedApi"></select>
+      <div class="form-group">
+        <input id="input" class="form-control" type="string" ng-model="main.input" />
+      </div>
+      <button class="btn btn-info" type="button" ng-click="main.selectedApi.method(main.input)">Search</button>
+    </form>
+
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="rep in main.reps">
+        <h4 class="list-group-item-heading">{{rep.name}}</h4>
+        <p>State: {{rep.state}}</p>
+      </li>
+    </ul>
+  </div>
+
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+
 </html>
