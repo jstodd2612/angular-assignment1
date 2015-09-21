@@ -20,21 +20,18 @@ angular
       {
         label: 'Name',
         method: function (name) {
-          console.log("name working");
           reps.searchByType(main.chooseType,'name', name).then(assignReps);
         }
       },
       {
         label: 'State',
         method: function (state) {
-          console.log("State is Workinginsh");
           reps.searchByType(main.chooseType,'state', state).then(assignReps);
         }
       },
       {
         label: 'Zip',
         method: function (zip) {
-          console.log("Zip is Workingish");
           reps.searchByType('all', 'zip', zip).then(assignReps);
         }
       }
