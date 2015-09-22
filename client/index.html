@@ -23,13 +23,13 @@
 
   <div ng-controller="MainCtrl as main" class="container">
     <h4>Select type of Congressman</h4>
-    <label><h5><input type="radio" ng-model="main.chooseType" value="reps" /> Representatives</h5></label><br>
-    <label><h5><input type="radio" ng-model="main.chooseType" value="sens" /> Senators</h5></label>
+    <label><h5><input type="radio" ng-model="main.congressType" value="reps" /> Representatives</h5></label><br>
+    <label><h5><input type="radio" ng-model="main.congressType" value="sens" /> Senators</h5></label>
     <br>
     <br>
     <h4>Search By:</h4>
     <form class="form-inline">
-      <select class="form-control" ng-options="item as item.label for item in main.apis" ng-model="main.selectedApi"></select>
+      <select class="form-control" ng-options="option as option.label for option in main.apis" ng-model="main.selectedApi"></select>
       <div class="form-group">
         <input id="input" class="form-control" type="string" ng-model="main.input" />
       </div>
