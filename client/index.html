@@ -29,15 +29,15 @@
     <br>
     <h4>Search By:</h4>
     <form class="form-inline">
-      <select class="form-control" ng-options="option as option.label for option in main.apis" ng-model="main.selectedApi"></select>
-      <div class="form-group">
-        <input id="input" class="form-control" type="string" ng-model="main.input" />
-      </div>
-      <button class="btn btn-info" type="button" ng-click="main.selectedApi.method(main.input)">Search</button>
+      <select class="form-control" ng-change="main.input = ''" ng-model="main.criteria" ng-options="item as item.label for item in main.apis"></select>
+        <input id="input" class="form-control" type="string" ng-model="main.input" ng-disabled="main.loading" autofocus/>
+      <button class="btn btn-info" type="submit" ng-click="main.criteria.method(main.input)" ng-disabled="main.loading || !main.input">Search</button>
     </form>
 
     <ul class="list-group">
-      <li class="list-group-item" ng-repeat="rep in main.reps">
+      <li class="list-group-item" ng-show="main.loading">Loading...</li>
+      <li class="list-group-item" ng-show="main.reps.length === 0 && main.searchedOnce && !main.loading">No Results by {{main.criteria.label}} for {{main.input}}</li>
+      <li ng-hide="main.loading" class="list-group-item" ng-repeat="rep in main.reps">
         <h4 class="list-group-item-heading">{{rep.name}}</h4>
         <p>State: {{rep.state}}</p>
       </li>
